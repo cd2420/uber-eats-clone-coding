@@ -13,6 +13,7 @@ import { User } from './users/entities/user.entity';
 import { JwtModule } from './jwt/jwt.module';
 import { JwtMiddleWare } from './jwt/jwt.middleware';
 import { AuthModule } from './auth/auth.module';
+import { Verification } from './users/entities/verification.entity';
 
 @Module({
   imports: [
@@ -43,7 +44,7 @@ import { AuthModule } from './auth/auth.module';
       database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== 'prod' ? true : false,
       logging: true,
-      entities: [User],
+      entities: [User, Verification],
     }),
     JwtModule.forRoot({
       privateKey: process.env.SECRET_KEY,

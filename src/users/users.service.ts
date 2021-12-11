@@ -68,7 +68,7 @@ export class UsersService {
           error: 'Wrong password',
         };
       }
-      console.log(user);
+
       const token = this.jwtService.sign(user.id);
       return {
         ok: true,
@@ -84,10 +84,7 @@ export class UsersService {
 
   async findById(id: number): Promise<UserProfileOutput> {
     try {
-      const user = await this.users.findOne({ id });
-      if (!user) {
-        throw Error();
-      }
+      const user = await this.users.findOneOrFail({ id });
       return {
         ok: true,
         user,
